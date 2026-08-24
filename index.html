@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Riley Worth | Cybersecurity Portfolio</title>
+
+  <meta
+    name="description"
+    content="Cybersecurity and digital forensics portfolio covering SIEM analysis, Windows event logs, registry forensics, forensic acquisition, browser artefacts and deleted-file recovery."
+  >
+
+  <style>
+    :root {
+      --background: #07111f;
+      --surface: #0d1b2a;
+      --surface-light: #13263a;
+      --text: #f4f7fb;
+      --muted: #a9b8c8;
+      --accent: #20c4d9;
+      --accent-light: #7ce5ef;
+      --orange: #ffad42;
+      --border: rgba(255, 255, 255, 0.11);
+      --maximum-width: 1120px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background:
+        radial-gradient(circle at top right, rgba(32, 196, 217, 0.13), transparent 32rem),
+        var(--background);
+      color: var(--text);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .container {
+      width: min(92%, var(--maximum-width));
+      margin: auto;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(7, 17, 31, 0.94);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+    }
+
+    nav {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+
+    .logo {
+      color: var(--accent-light);
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.4rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent-light);
+    }
+
+    .hero {
+      min-height: 620px;
+      display: grid;
+      align-items: center;
+      padding: 6rem 0;
+    }
+
+    .eyebrow {
+      margin-bottom: 1rem;
+      color: var(--accent-light);
+      font-size: 0.85rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      max-width: 850px;
+      font-size: clamp(2.8rem, 7vw, 5.8rem);
+      line-height: 1.03;
+      letter-spacing: -0.045em;
+    }
+
+    .hero-description {
+      max-width: 720px;
+      margin: 1.7rem 0 2.2rem;
+      color: var(--muted);
+      font-size: 1.16rem;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 0.85rem 1.25rem;
+      border: 1px solid var(--accent);
+      border-radius: 7px;
+      background: var(--accent);
+      color: #041017;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .button.secondary {
+      background: transparent;
+      color: var(--accent-light);
+    }
+
+    section {
+      padding: 5.5rem 0;
+    }
+
+    .section-label {
+      color: var(--orange);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.17em;
+      text-transform: uppercase;
+    }
+
+    h2 {
+      margin: 0.45rem 0 1.2rem;
+      font-size: clamp(2rem, 4vw, 3.3rem);
+      line-height: 1.1;
+    }
+
+    .section-introduction {
+      max-width: 760px;
+      margin-bottom: 2.5rem;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 2rem;
+    }
+
+    .panel {
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--surface);
+    }
+
+    .panel h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.25rem;
+    }
+
+    .panel p {
+      color: var(--muted);
+    }
+
+    .skills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+      margin-top: 1.3rem;
+    }
+
+    .skill {
+      padding: 0.45rem 0.75rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-light);
+      color: var(--accent-light);
+      font-size: 0.9rem;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.3rem;
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      min-height: 370px;
+      padding: 2rem;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: linear-gradient(145deg, var(--surface-light), var(--surface));
+      transition: transform 0.2s ease, border-color 0.2s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124, 229, 239, 0.6);
+    }
+
+    .project-number {
+      color: var(--orange);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+    }
+
+    .project-card h3 {
+      margin: 0.8rem 0;
+      font-size: 1.45rem;
+      line-height: 1.25;
+    }
+
+    .project-card p {
+      margin-bottom: 1.2rem;
+      color: var(--muted);
+    }
+
+    .project-tools {
+      margin-bottom: 1.6rem;
+      color: var(--accent-light);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .project-link {
+      margin-top: auto;
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .project-link:hover {
+      color: var(--accent-light);
+    }
+
+    .method {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1rem;
+    }
+
+    .method-step {
+      padding: 1.5rem;
+      border-top: 3px solid var(--accent);
+      background: var(--surface);
+    }
+
+    .method-step strong {
+      display: block;
+      margin-bottom: 0.4rem;
+      color: var(--accent-light);
+    }
+
+    .method-step span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .laboratory-note {
+      margin-top: 2rem;
+      padding: 1.2rem 1.4rem;
+      border-left: 4px solid var(--orange);
+      background: rgba(255, 173, 66, 0.08);
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 3rem 0;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    .footer-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    footer a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+
+    @media (max-width: 800px) {
+      nav {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 1rem 0;
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+      }
+
+      .hero {
+        min-height: auto;
+      }
+
+      .about-grid,
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .method {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-content {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav class="container" aria-label="Main navigation">
+      <a class="logo" href="#">Riley Worth</a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#methodology">Methodology</a></li>
+        <li>
+          <a href="https://github.com/rileyw734" target="_blank" rel="noopener">
+            GitHub
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">Cybersecurity and Digital Forensics</p>
+
+        <h1>Investigating evidence. Reconstructing activity. Reporting clearly.</h1>
+
+        <p class="hero-description">
+          A practical portfolio covering SIEM monitoring, Windows event-log
+          analysis, memory and registry forensics, forensic acquisition,
+          browser artefacts and deleted-file recovery.
+        </p>
+
+        <div class="button-row">
+          <a class="button" href="#projects">Explore projects</a>
+
+          <a
+            class="button secondary"
+            href="https://github.com/rileyw734"
+            target="_blank"
+            rel="noopener"
+          >
+            View GitHub profile
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container">
+        <p class="section-label">About</p>
+        <h2>Developing practical investigative skills</h2>
+
+        <div class="about-grid">
+          <div class="panel">
+            <h3>Profile</h3>
+
+            <p>
+              I am developing hands-on cybersecurity and digital-forensics
+              experience through controlled laboratory investigations. My work
+              focuses on collecting evidence, analysing artefacts, correlating
+              activity and communicating defensible conclusions.
+            </p>
+          </div>
+
+          <div class="panel">
+            <h3>Tools and technologies</h3>
+
+            <div class="skills">
+              <span class="skill">Splunk</span>
+              <span class="skill">Windows Event Viewer</span>
+              <span class="skill">Autopsy</span>
+              <span class="skill">FTK Imager</span>
+              <span class="skill">Volatility</span>
+              <span class="skill">MFTECmd</span>
+              <span class="skill">PECmd</span>
+              <span class="skill">SBECmd</span>
+              <span class="skill">NTFS</span>
+              <span class="skill">Windows Registry</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <p class="section-label">Selected work</p>
+        <h2>Cybersecurity projects</h2>
+
+        <p class="section-introduction">
+          Each case study documents the investigation objective, tools,
+          methodology, evidence, findings and limitations.
+        </p>
+
+        <div class="projects-grid">
+          <article class="project-card">
+            <span class="project-number">PROJECT 01</span>
+            <h3>Splunk Enterprise Log Analysis</h3>
+
+            <p>
+              Ingested and analysed macOS system logs in Splunk. Configured
+              Unix and Linux parsing support, searched for error-related
+              activity and produced visualisations for further analysis.
+            </p>
+
+            <div class="project-tools">
+              Splunk Enterprise · macOS logs · SPL
+            </div>
+
+            <a
+              class="project-link"
+              href="projects/splunk-enterprise-assignment.pdf"
+            >
+              View complete report →
+            </a>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">PROJECT 02</span>
+            <h3>Investigating Windows Event Logs</h3>
+
+            <p>
+              Investigated failed and successful authentication activity using
+              Security log events 4625 and 4624. Five failures were associated
+              with the forensic_test account, with no corresponding successful
+              logon identified for that account.
+            </p>
+
+            <div class="project-tools">
+              Windows Event Viewer · Event IDs 4625 and 4624
+            </div>
+
+            <a
+              class="project-link"
+              href="projects/investigating-windows-event-logs.pdf"
+            >
+              View complete report →
+            </a>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">PROJECT 03</span>
+            <h3>Windows Registry Forensics</h3>
+
+            <p>
+              Examined a Windows memory image with Volatility to identify
+              accounts and investigate Registry artefacts. UserAssist evidence
+              was correlated with the SmartNet profile, while the examined Run
+              key did not demonstrate related persistence.
+            </p>
+
+            <div class="project-tools">
+              Volatility 2.6 · SAM · UserAssist · Run keys
+            </div>
+
+            <a
+              class="project-link"
+              href="projects/windows-registry-forensics.pdf"
+            >
+              View complete report →
+            </a>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">PROJECT 04</span>
+            <h3>Forensic Acquisition and Artefact Analysis</h3>
+
+            <p>
+              Created and verified an E01 forensic image before examining its
+              partitions and Windows artefacts. The analysis included an
+              extracted MFT sample, Prefetch evidence, Shell Bags and system
+              metadata.
+            </p>
+
+            <div class="project-tools">
+              FTK Imager · Autopsy · MFTECmd · PECmd
+            </div>
+
+            <a
+              class="project-link"
+              href="projects/forensic-acquisition-and-artefact-analysis.pdf"
+            >
+              View complete report →
+            </a>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">PROJECT 05</span>
+            <h3>Windows Browser Artefact Analysis</h3>
+
+            <p>
+              Extracted and interpreted browser history, cookies, downloads,
+              bookmarks and stored-login metadata. Artefacts were correlated to
+              reconstruct browser activity while recognising the limitations
+              of individual records.
+            </p>
+
+            <div class="project-tools">
+              Autopsy · Browser databases · SQLite artefacts
+            </div>
+
+            <a
+              class="project-link"
+              href="projects/browser-artefact-analysis.pdf"
+            >
+              View complete report →
+            </a>
+          </article>
+
+          <article class="project-card">
+            <span class="project-number">PROJECT 06</span>
+            <h3>Deleted-File Recovery and Analysis</h3>
+
+            <p>
+              Investigated deleted NTFS records, recovered the laboratory file
+              exercise1_final_recovery.txt and examined associated metadata and
+              timestamps to document the recovery process.
+            </p>
+
+            <div class="project-tools">
+              Autopsy · NTFS metadata · File recovery
+            </div>
+
+            <a
+              class="project-link"
+              href="projects/deleted-file-recovery.pdf"
+            >
+              View complete report →
+            </a>
+          </article>
+        </div>
+
+        <div class="laboratory-note">
+          All evidence shown in this portfolio was produced or examined within
+          authorised training environments. No live organisational or personal
+          systems were investigated.
+        </div>
+      </div>
+    </section>
+
+    <section id="methodology">
+      <div class="container">
+        <p class="section-label">Approach</p>
+        <h2>Investigation methodology</h2>
+
+        <div class="method">
+          <div class="method-step">
+            <strong>01 · Acquire</strong>
+            <span>Collect evidence using appropriate forensic procedures.</span>
+          </div>
+
+          <div class="method-step">
+            <strong>02 · Verify</strong>
+            <span>Confirm evidence integrity and document its provenance.</span>
+          </div>
+
+          <div class="method-step">
+            <strong>03 · Examine</strong>
+            <span>Identify relevant logs, files and system artefacts.</span>
+          </div>
+
+          <div class="method-step">
+            <strong>04 · Correlate</strong>
+            <span>Compare multiple evidence sources and assess context.</span>
+          </div>
+
+          <div class="method-step">
+            <strong>05 · Report</strong>
+            <span>Present supported findings, limitations and conclusions.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <p>© 2026 Riley Worth · Cybersecurity Portfolio</p>
+
+      <a
+        href="https://github.com/rileyw734"
+        target="_blank"
+        rel="noopener"
+      >
+        github.com/rileyw734
+      </a>
+    </div>
+  </footer>
+</body>
+</html>
